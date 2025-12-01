@@ -70,8 +70,6 @@ void partTwo(vector<string> commands){
 					char dir = commands[i][0];
 				 	int steps = std::stoi(commands[i].substr(1));
 
-					cout << "Moving " << steps << " " << dir << "\n";
-
 					int stepDir = dir == 'R' ? 1 : -1;
 					for (int j=0;j<steps;j++)
 					{
