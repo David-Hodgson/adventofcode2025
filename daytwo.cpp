@@ -54,6 +54,7 @@ Range parseRange(string input){
 
 	return Range(min,max);
 }
+
 void partOne(vector<Range> ranges){
 
 	cout << "Part One\n";

@@ -1,0 +1,8 @@
+#include <vector>
+#include <string>
+
+namespace Util{
+	namespace File{
+		std::vector<std::string> readFile(std::string);
+	}
+}

@@ -1,18 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+
+#include "cutil"
 using namespace std;
 
-vector<string> readFile(string filename){
-	ifstream inputfile(filename);
-	string readLine;
-	vector<string> lines;
-	while(getline(inputfile,readLine)){
-					lines.push_back(readLine);
-	}
-
-	return lines;
-}
 
 void partOne(vector<string> commands){
 
@@ -93,7 +85,7 @@ void partTwo(vector<string> commands){
 int main(){
 
 	cout << "Day One\n";
-	vector<string> commands = readFile("input_dayone.txt");
+	vector<string> commands = Util::File::readFile("input_dayone.txt");
 
 	partOne(commands);
 	partTwo(commands);
