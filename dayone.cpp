@@ -3,9 +3,12 @@
 #include <vector>
 
 #include "cutil"
+
+#include "dayone.hpp"
+
 using namespace std;
 
-
+namespace DayOne {
 void partOne(vector<string> commands){
 
 	cout << "Part One\n";
@@ -82,11 +85,12 @@ void partTwo(vector<string> commands){
 	cout << "Number of zero's: " << zeroCount << "\n";
 }
 
-int main(){
+void dayone(){
 
 	cout << "Day One\n";
 	vector<string> commands = Util::File::readFile("input_dayone.txt");
 
 	partOne(commands);
 	partTwo(commands);
+}
 }

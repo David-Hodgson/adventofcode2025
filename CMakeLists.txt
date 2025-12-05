@@ -6,6 +6,8 @@ add_executable(AoC2025)
 
 target_sources(AoC2025
 	PRIVATE
+		aoc2025.cpp
+		dayone.cpp
 		dayfour.cpp
 		util.cpp
 )

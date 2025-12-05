@@ -92,7 +92,7 @@ void partTwo(){
 	cout << "Part Two\n";
 }
 
-int main(){
+void dayfour(){
 
 	cout << "Day Four\n";
 

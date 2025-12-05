@@ -1,0 +1,3 @@
+namespace DayOne{
+	void dayone();
+}
