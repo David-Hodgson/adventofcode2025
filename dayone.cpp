@@ -9,88 +9,85 @@
 using namespace std;
 
 namespace DayOne {
-void partOne(vector<string> commands){
 
-	cout << "Part One\n";
+	void partOne(vector<string> commands){
 
-	int currentPos = 50;
-	int zeroCount = 0;
+		cout << "Part One\n";
+
+		int currentPos = 50;
+		int zeroCount = 0;
 
 
-	for(int i=0;i<commands.size();i++){
-//					cout << "Current Pos: " << currentPos << "\n";
-//					cout << "Processing " << commands[i] << "\n";
+		for(int i=0;i<commands.size();i++){
 				 
-					char dir = commands[i][0];
-				 	int steps = std::stoi(commands[i].substr(1));
+			char dir = commands[i][0];
+			int steps = std::stoi(commands[i].substr(1));
 
-//					cout << "Dir: " << dir << ", Steps: " << steps << "\n";
 
-					if (dir == 'R') {
-									currentPos = currentPos + steps;
-					}
-					else
-					{
-									currentPos = currentPos - steps;
-					}
+			if (dir == 'R') {
+				currentPos = currentPos + steps;
+			}
+			else
+			{
+				currentPos = currentPos - steps;
+			}
 
-//					cout << "New Pos (before adjustment): " << currentPos << "\n";
-					if (currentPos < 0){
-						while(currentPos<0){
-										currentPos = currentPos + 100;
-						}
-					}
+			if (currentPos < 0){
+				while(currentPos<0){
+					currentPos = currentPos + 100;
+				}
+			}
 
-					if (currentPos > 99){
-									currentPos = currentPos % 100;
-					}
+			if (currentPos > 99){
+				currentPos = currentPos % 100;
+			}
 
-					if (currentPos == 0)
-									zeroCount++;
+			if (currentPos == 0)
+				zeroCount++;
+		}
+
+		cout << "Number of zero's: " << zeroCount << "\n";
 	}
 
-	cout << "Number of zero's: " << zeroCount << "\n";
-}
 
+	void partTwo(vector<string> commands){
 
-void partTwo(vector<string> commands){
+		cout << "Part Two\n";
 
-	cout << "Part Two\n";
+		int currentPos = 50;
+		int zeroCount = 0;
 
-	int currentPos = 50;
-	int zeroCount = 0;
-
-	for(int i=0;i<commands.size();i++){
+		for(int i=0;i<commands.size();i++){
 				 
-					char dir = commands[i][0];
-				 	int steps = std::stoi(commands[i].substr(1));
+			char dir = commands[i][0];
+			int steps = std::stoi(commands[i].substr(1));
 
-					int stepDir = dir == 'R' ? 1 : -1;
-					for (int j=0;j<steps;j++)
-					{
-						currentPos = currentPos + stepDir;
+			int stepDir = dir == 'R' ? 1 : -1;
+			for (int j=0;j<steps;j++)
+			{
+				currentPos = currentPos + stepDir;
 
-						if (currentPos > 99)
-										currentPos = 0;
+				if (currentPos > 99)
+					currentPos = 0;
 
-						if (currentPos < 0)
-										currentPos = 99;
+				if (currentPos < 0)
+					currentPos = 99;
 
-						if (currentPos ==0)
-										zeroCount++;
-									
-					}
+				if (currentPos ==0)
+					zeroCount++;
+								
+			}
+		}
+
+		cout << "Number of zero's: " << zeroCount << "\n";
 	}
 
-	cout << "Number of zero's: " << zeroCount << "\n";
-}
+	void dayone(){
 
-void dayone(){
+		cout << "Day One\n";
+		vector<string> commands = Util::File::readFile("data/input_dayone.txt");
 
-	cout << "Day One\n";
-	vector<string> commands = Util::File::readFile("input_dayone.txt");
-
-	partOne(commands);
-	partTwo(commands);
-}
+		partOne(commands);
+		partTwo(commands);
+	}
 }
