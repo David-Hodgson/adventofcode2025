@@ -8,6 +8,7 @@ target_sources(AoC2025
 	PRIVATE
 		aoc2025.cpp
 		dayone.cpp
+		daytwo.cpp
 		dayfour.cpp
 		dayfive.cpp
 		util.cpp

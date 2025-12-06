@@ -96,7 +96,7 @@ void dayfour(){
 
 	cout << "Day Four\n";
 
-	vector<string> input = Util::File::readFile("data/input_dayfour.txt");
+	vector<string> input = Util::File::readFileAsListOfStrings("data/input_dayfour.txt");
 
 	partOne(input);
 	partTwo();

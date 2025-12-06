@@ -3,6 +3,8 @@
 
 namespace Util{
 	namespace File{
-		std::vector<std::string> readFile(std::string);
+		std::vector<std::string> readFileAsListOfStrings(std::string);
+
+		std::string readFileAsString(std::string);
 	}
 }

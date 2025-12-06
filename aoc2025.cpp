@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "dayone.hpp"
+#include "daytwo.hpp"
 #include "dayfour.hpp"
 #include "dayfive.hpp"
 
@@ -10,6 +11,7 @@ int main(){
 	cout << "Advent of Code 2025" << endl;
 
 	DayOne::dayone();
+	DayTwo::go();
 	dayfour();
 	DayFive::go();
 }

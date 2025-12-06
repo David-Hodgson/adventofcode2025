@@ -75,7 +75,7 @@ namespace DayFive{
 	void go(){
 		cout << "Day Five" << endl;
 
-		vector<string> input = Util::File::readFile("data/input_dayfive.txt");
+		vector<string> input = Util::File::readFileAsListOfStrings("data/input_dayfive.txt");
 
 		partOne(input);
 		partTwo();

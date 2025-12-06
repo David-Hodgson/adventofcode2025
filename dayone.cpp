@@ -85,7 +85,7 @@ namespace DayOne {
 	void dayone(){
 
 		cout << "Day One\n";
-		vector<string> commands = Util::File::readFile("data/input_dayone.txt");
+		vector<string> commands = Util::File::readFileAsListOfStrings("data/input_dayone.txt");
 
 		partOne(commands);
 		partTwo(commands);
