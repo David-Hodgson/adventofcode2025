@@ -4,6 +4,7 @@
 #include "daytwo.hpp"
 #include "dayfour.hpp"
 #include "dayfive.hpp"
+#include "daysix.hpp"
 
 using namespace std;
 
@@ -14,4 +15,5 @@ int main(){
 	DayTwo::go();
 	dayfour();
 	DayFive::go();
+	DaySix::go();
 }

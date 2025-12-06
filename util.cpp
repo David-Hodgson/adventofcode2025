@@ -6,6 +6,10 @@ namespace Util{
 	namespace File{
 		std::vector<std::string> readFileAsListOfStrings(std::string filename) {
 			std::ifstream inputfile(filename);
+
+			if (!inputfile){
+				std::cerr << "Error reading input file" << std::endl;
+			}
 			std::string readLine;
 			std::vector<std::string> lines;
     		while (getline(inputfile, readLine)) {
