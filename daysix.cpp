@@ -9,7 +9,9 @@ using namespace std;
 
 namespace DaySix{
 
-	void processInput(vector<string> input){
+	vector<vector<uint>> getNumberRowsFromInput (vector<string> input){
+
+		vector<vector<uint>> rows;
 
 		for(int i=0;i<input.size()-1;i++)
 		{
@@ -29,14 +31,69 @@ namespace DaySix{
 				}
 			}
 
-			cout << numberrow.size() << endl;
+			//Parse last entry
+			if (numberDigits.length() > 0) {
+				int lastnumber = stoi(numberDigits);
+				numberrow.push_back(lastnumber);
+			}
+			rows.push_back(numberrow);
 		}
 
-		//cout << input[input.size()-1] << endl;
+		return rows;
 	}
 
-	void partOne(){
+	vector<char> getOperatorsFromInput(vector<string> input){
+
+		vector<char> operators;
+		string operatorString = input[input.size()-1];
+
+		for(int i=0; i< operatorString.length() ;i++)
+		{
+			if (operatorString[i] == ' ')
+			{
+				continue;
+			}
+			operators.push_back(operatorString[i]);
+		}
+		return operators;
+	}
+
+	ulong totalColumn(vector<uint> column, char op){
+		ulong total = column[0];
+	
+		if (op == '+'){
+			for (int i=1;i<column.size();i++)
+			{
+				total = total + column[i];
+			}
+		}
+
+		if (op == '*'){
+			for (int i=1;i<column.size();i++){
+				total = total * column[i];
+			}
+		}
+		
+		return total;
+	}
+
+	void partOne(vector<vector<uint>> numbers, vector<char> operators){
 		cout << "Part One" << endl;
+
+		int colCount = numbers[0].size();
+		ulong total = 0;
+
+		for (int i=0;i<colCount;i++)
+		{
+			vector<uint> col;
+			for(int j=0;j<numbers.size();j++)
+			{
+				col.push_back(numbers[j][i]);
+			}
+			total = total + totalColumn(col, operators[i]);
+		}
+
+		cout << "Total: " << total << endl;
 	}
 
 	void partTwo(){
@@ -47,9 +104,11 @@ namespace DaySix{
 		cout << "Day Six" << endl;
 
 		vector<string> input = Util::File::readFileAsListOfStrings("data/input_daysix.txt");
-		processInput(input);
-
-		partOne();
+		vector<vector<uint>> numberRows = getNumberRowsFromInput(input);
+		vector<char> operators = getOperatorsFromInput(input);
+		
+		partOne(numberRows, operators);
+		
 		partTwo();
 	}
 }
