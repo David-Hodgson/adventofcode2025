@@ -7,6 +7,7 @@
 #include "dayfive.hpp"
 #include "daysix.hpp"
 #include "dayseven.hpp"
+#include "dayeight.hpp"
 
 using namespace std;
 
@@ -20,4 +21,5 @@ int main(){
 	DayFive::go();
 	DaySix::go();
 	DaySeven::go();
+	DayEight::go();
 }

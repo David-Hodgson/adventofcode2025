@@ -1,0 +1,3 @@
+namespace DayEight{
+	void go();
+}
