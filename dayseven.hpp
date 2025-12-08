@@ -1,0 +1,3 @@
+namespace DaySeven{
+	void go();
+}
