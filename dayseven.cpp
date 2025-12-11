@@ -93,25 +93,26 @@ namespace DaySeven{
 			cout << "in Get time lines" << endl;
 			int timeLineCount = 0;
 
-			for(int i=0;i<layout.size();i++){
+			vector<vector<uint>> timelineMap;
 
-				int beamCount = 0;
-				bool inSplitLine = false;
-				for (int j=0;j<layout[i].length();j++){
-					if (layout[i][j] == '|'){
-						beamCount++;
-						cout << "Found a beam" << endl;
+			for(int row=0;row<layout.size();row++){
+				vector<uint> numberRow;
+				timelineMap.push_back(numberRow);
+				for(int col=0;col<layout[row].length();col++){
+
+					timelineMap[row].push_back(0);
+					if (layout[row][col] == 'S'){
+						timelineMap[row][col] = 1;
 					}
 
-					if (layout[i][j] == '^')
-						inSplitLine = true;
-				}
+					if (layout[row][col] == '|'){
 
-				if (inSplitLine){
-					cout << "FOund a split line" << endl;
-					timeLineCount += beamCount;
+						uint cellValue = 0;
+
+					
+					}
 				}
-			}	
+			}
 
 			return timeLineCount;
 		}
@@ -132,6 +133,7 @@ namespace DaySeven{
 
 		Manifold m = Manifold(input);
 		m.fireBeam();
+		cout << "Part two splits: " << m.getSplitCount() << endl;
 		int timeLineCount = m.getTimeLines();
 
 		cout << "\t\t\tTime Lines: " << timeLineCount << endl;
