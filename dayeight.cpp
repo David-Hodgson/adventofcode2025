@@ -44,7 +44,7 @@ namespace DayEight{
 			}
 
 			void SetCircuit(Circuit* c){
-				cout << "Setting circuit for junction box" << endl;
+				//cout << "Setting circuit for junction box" << endl;
 				circuit = c;
 				inCircuit = true;
 			}
@@ -145,7 +145,7 @@ namespace DayEight{
 	void buildCircuits(vector<tuple<float,JunctionBox*,JunctionBox*>> distanceList)
 	{
 		cout << "Building Circuits" << endl;
-		vector<Circuit> circuits;
+		vector<Circuit*> circuits;
 
 		for(int i=0;i<1000;i++){
 
@@ -160,12 +160,40 @@ namespace DayEight{
 			//cout << "Box 2 - x: " << box2.x << ", y: " << box2.y << ", z: " << box2.z << " Incircuit: " << box2.inCircuit << endl;
 
 			if (box1->inCircuit || box2->inCircuit){
-				cout << "A box is in a circuit" << endl;
+			//	cout << "A box is in a circuit" << endl;
 
-				cout << "\t" << box1->inCircuit << endl;
-				cout << "\t" << box2->inCircuit << endl;
+			//	cout << "\t" << box1->inCircuit << endl;
+				//cout << "\t" << box2->inCircuit << endl;
+
+				if (!box1->inCircuit){
+					//Box 1 is not in a circuit
+					//Box 2 must be in the circuit
+					//
+					//add box 1 to the box 2 circuit
+					//
+					Circuit* b2Circuit = box2->circuit;
+					b2Circuit->AddJunctionBox(box1);
+					
+				} else if (!box2->inCircuit){
+
+					//Box 2 is not in a circuit
+					//Box 1 must be in the circuit
+					//
+					//add box 2 to the box 1 circuit
+					Circuit* b1Circuit = box1->circuit;
+					b1Circuit->AddJunctionBox(box2);
+				}
+				else {
+					//Both boxes are in circuit
+					//so we should merge circuits	
+					cout << "Both boxes are already in circuits" << endl;
+
+					if (box1->circuit == box2->circuit){
+						cout << "Both boxes already in same circuit" << endl;
+					}
+				}
 			} else {
-				cout << "Neither box is in a circuit" << endl;
+				//cout << "Neither box is in a circuit" << endl;
 				Circuit* newCircuit = new Circuit();
 
 				//cout << "Box 1 inCircuit: " << box1.inCircuit << endl;
@@ -175,6 +203,9 @@ namespace DayEight{
 
 				//cout << "Box 1 inCircuit: " << box1.inCircuit << endl;
 				//cout << "Box 2 inCircuit: " << box2.inCircuit << endl;
+				//
+				
+				circuits.push_back(newCircuit);
 			}	
 		}
 
@@ -189,9 +220,9 @@ namespace DayEight{
 
 		JunctionBox* jb = boxes[0];
 		JunctionBox jb1 = *jb;
-		cout << "x: " << jb1.x << endl;
+		//cout << "x: " << jb1.x << endl;
 
-		cout << "Parsed into " << boxes.size() << " junction boxes" << endl;
+		//cout << "Parsed into " << boxes.size() << " junction boxes" << endl;
 
 		vector<tuple<float,JunctionBox*,JunctionBox*>> distanceList = distanceMap(boxes);
 		buildCircuits(distanceList);
