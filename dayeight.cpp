@@ -39,20 +39,12 @@ namespace DayEight{
 				float s2 = pow(abs(int(y - otherBox->y)), 2);
 				float s3 = pow(abs(int(z - otherBox->z)), 2);
 
-				if (x==162 && y==817 && z==812 &&
-				otherBox->x == 425 && otherBox->y == 690 && otherBox->z==689) {
-					cout << "Found our Box" << endl;
-					cout << "\tS1: " << s1 << endl;
-					cout << "\tS2: " << s2 << endl;
-					cout << "\tS3: " << s3 << endl;
-				}
 				distance = sqrt(s1+s2+s3);
 
 				return distance;
 			}
 
 			void SetCircuit(Circuit* c){
-				//cout << "Setting circuit for junction box" << endl;
 				circuit = c;
 				inCircuit = true;
 			}
@@ -66,7 +58,6 @@ namespace DayEight{
 			{}
 
 			void AddJunctionBox(JunctionBox* boxToAdd){
-			//	cout << "Adding box to circuit" << endl;
 				boxes.push_back(boxToAdd);
 				boxToAdd->SetCircuit(this);
 			}
@@ -84,18 +75,12 @@ namespace DayEight{
 			}
 
 			void Merge(Circuit* otherCircuit){
-				cout << "merging circuits" << endl;
-
-				cout << "\tStarting Size: " << GetCircuitSize() << endl;
-				cout << "\tBoxes to Add: " << otherCircuit->GetCircuitSize() << endl;
 				vector<JunctionBox*> otherBoxes = otherCircuit->GetBoxes();
 
 				for (int i=0; i<otherBoxes.size(); i++){
-					//cout << "x: " << otherBoxes[i].x << endl;
 					AddJunctionBox(otherBoxes[i]);	
 				}
 
-				cout << "\tEnd Size: " << GetCircuitSize() << endl;
 				otherCircuit->Clear();
 				
 			}
@@ -110,14 +95,12 @@ namespace DayEight{
 				for (int i=0;i<inputBoxes.size();i++){
 
 					JunctionBox jb = *inputBoxes[i];
-			//		cout << "x: " << jb.x << endl;
 					junctionBoxes.push_back(inputBoxes[i]);
 				}
 
 
 				for (int i=0;i<junctionBoxes.size();i++){
 					JunctionBox jb = *junctionBoxes[i];
-			//		cout << "JB " << i << " x: " << jb.x << ", inCircuit: " << jb.inCircuit << endl;
 				}
 
 			}
@@ -129,10 +112,8 @@ namespace DayEight{
 				for(int i=0;i<junctionBoxes.size();i++){
 					for(int j=i+1;j<junctionBoxes.size();j++){
 
-						//cout << "processing " << i << "," << j << endl;
 
 						float distance = junctionBoxes[i]->GetDistance(junctionBoxes[j]);
-						//cout << "\tDistance: " << distance << endl;
 
 						tuple<float, JunctionBox*,JunctionBox*> tp = {distance, junctionBoxes[i], junctionBoxes[j]};
 
@@ -163,7 +144,6 @@ namespace DayEight{
 
 			JunctionBox* jb = new  JunctionBox(x,y,z);
 
-			//cout << "JB: " << i << " x: " << jb->x << ", y: " << jb->y << ", z: " << jb->z << ", inCircuit: " << jb->inCircuit << endl; 
 			boxes.push_back(jb);
 		}
 		return boxes;
@@ -172,12 +152,10 @@ namespace DayEight{
 	vector<tuple<float,JunctionBox*, JunctionBox*>> distanceMap(vector<JunctionBox*> boxes){
 		DistanceMap map(boxes);
 		return map.GenerateDistance();
-	//	return map
 	}
 
 	vector<Circuit*> buildCircuits(vector<tuple<float,JunctionBox*,JunctionBox*>> distanceList)
 	{
-		cout << "Building Circuits" << endl;
 		vector<Circuit*> circuits;
 
 		for(int i=0;i<1000;i++){
@@ -187,16 +165,7 @@ namespace DayEight{
 			JunctionBox* box1 = get<1>(pair);
 			JunctionBox* box2 = get<2>(pair);
 
-			//cout << box1 << endl;
-			//cout << "Box 1 - x: " << box1.x << ", y: " << box1.y << ", z: " << box1.z << " Incircuit: " << box1.inCircuit << endl;
-
-			//cout << "Box 2 - x: " << box2.x << ", y: " << box2.y << ", z: " << box2.z << " Incircuit: " << box2.inCircuit << endl;
-
 			if (box1->inCircuit || box2->inCircuit){
-			//	cout << "A box is in a circuit" << endl;
-
-			//	cout << "\t" << box1->inCircuit << endl;
-				//cout << "\t" << box2->inCircuit << endl;
 
 				if (!box1->inCircuit){
 					//Box 1 is not in a circuit
@@ -219,12 +188,9 @@ namespace DayEight{
 				else {
 					//Both boxes are in circuit
 					//so we should merge circuits	
-					//cout << "Both boxes are already in circuits" << endl;
-
 					if (box1->circuit != box2->circuit){
 
 						//Need to merge circuits
-						//
 						Circuit* b1Circuit = box1->circuit;
 						Circuit* b2Circuit = box2->circuit;
 						
@@ -233,51 +199,50 @@ namespace DayEight{
 					}
 				}
 			} else {
-				//cout << "Neither box is in a circuit" << endl;
 				Circuit* newCircuit = new Circuit();
 
-				//cout << "Box 1 inCircuit: " << box1.inCircuit << endl;
-				//cout << "Box 2 inCircuit: " << box2.inCircuit << endl;
 				newCircuit->AddJunctionBox(box1);
 				newCircuit->AddJunctionBox(box2);
 
-				//cout << "Box 1 inCircuit: " << box1.inCircuit << endl;
-				//cout << "Box 2 inCircuit: " << box2.inCircuit << endl;
-				//
-				
 				circuits.push_back(newCircuit);
 			}	
 		}
 
-		cout << "Built " << circuits.size() << " circuits" << endl;
 		return circuits;
 	}
 
 	void partOne(vector<string> input){
 		cout << "\t\tPart One" << endl;
 
-		cout<< "Got: " << input.size() << " input" << endl;
 		vector<JunctionBox*> boxes = parseInput(input);
 
-		JunctionBox* jb = boxes[0];
-		JunctionBox jb1 = *jb;
-		//cout << "x: " << jb1.x << endl;
-
-		//cout << "Parsed into " << boxes.size() << " junction boxes" << endl;
-
 		vector<tuple<float,JunctionBox*,JunctionBox*>> distanceList = distanceMap(boxes);
-		cout << "Distance List Size: " << distanceList.size() << endl;
 		vector<Circuit*> circuits = buildCircuits(distanceList);
 
-		int circuitCount = 0;
+		int biggest = 0;
+		int nextBiggest = 0;
+		int thirdBiggest = 0;
 
 		for (int i=0;i<circuits.size();i++){
 
-			if (circuits[i]->GetCircuitSize() >0)
-				cout << "Circuit Size: " << circuits[i]->GetCircuitSize() << endl;
+			int circuitSize = circuits[i]->GetCircuitSize();
+
+			if (circuitSize > thirdBiggest)
+				thirdBiggest = circuitSize;
+
+			if (circuitSize > nextBiggest){
+				thirdBiggest = nextBiggest;
+				nextBiggest = circuitSize;
+			}
+
+			if (circuitSize > biggest) {
+				nextBiggest = biggest;
+				biggest = circuitSize;
+			}
 		}
 
-		cout << "Circuit Count: " << circuitCount << endl;
+		int total = biggest * nextBiggest * thirdBiggest;
+		cout << "\t\t\tTotal: " << total << endl;
 
 	}
 
