@@ -60,14 +60,14 @@ namespace DayEight{
 
 
 	class Circuit{
-		vector<JunctionBox> boxes;
+		vector<JunctionBox*> boxes;
 		public:
 			Circuit()
 			{}
 
 			void AddJunctionBox(JunctionBox* boxToAdd){
 			//	cout << "Adding box to circuit" << endl;
-				boxes.push_back(*boxToAdd);
+				boxes.push_back(boxToAdd);
 				boxToAdd->SetCircuit(this);
 			}
 
@@ -75,7 +75,7 @@ namespace DayEight{
 				return boxes.size();
 			}
 
-			vector<JunctionBox> GetBoxes(){
+			vector<JunctionBox*> GetBoxes(){
 				return boxes;
 			}
 
@@ -86,13 +86,16 @@ namespace DayEight{
 			void Merge(Circuit* otherCircuit){
 				cout << "merging circuits" << endl;
 
-				vector<JunctionBox> otherBoxes = otherCircuit->GetBoxes();
+				cout << "\tStarting Size: " << GetCircuitSize() << endl;
+				cout << "\tBoxes to Add: " << otherCircuit->GetCircuitSize() << endl;
+				vector<JunctionBox*> otherBoxes = otherCircuit->GetBoxes();
 
 				for (int i=0; i<otherBoxes.size(); i++){
-					cout << "x: " << otherBoxes[i].x << endl;
-					AddJunctionBox(&otherBoxes[i]);	
+					//cout << "x: " << otherBoxes[i].x << endl;
+					AddJunctionBox(otherBoxes[i]);	
 				}
 
+				cout << "\tEnd Size: " << GetCircuitSize() << endl;
 				otherCircuit->Clear();
 				
 			}
@@ -263,19 +266,7 @@ namespace DayEight{
 		//cout << "Parsed into " << boxes.size() << " junction boxes" << endl;
 
 		vector<tuple<float,JunctionBox*,JunctionBox*>> distanceList = distanceMap(boxes);
-
-		for (int i=0; i<38;i++){
-
-			float dist = get<0>(distanceList[i]);
-			JunctionBox* jb1 = get<1>(distanceList[i]);
-			JunctionBox* jb2 = get<2>(distanceList[i]);
-
-			cout << dist << " ";
-			cout << jb1->x << "," << jb1->y << "," << jb1->z;
-			cout << " and ";
-			cout << jb2->x << "," << jb2->y << "," << jb2->z << endl;
-		}
-
+		cout << "Distance List Size: " << distanceList.size() << endl;
 		vector<Circuit*> circuits = buildCircuits(distanceList);
 
 		int circuitCount = 0;
