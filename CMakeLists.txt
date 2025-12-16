@@ -15,5 +15,6 @@ target_sources(AoC2025
 		daysix.cpp
 		dayseven.cpp
 		dayeight.cpp
+		daynine.cpp
 		util.cpp
 )
