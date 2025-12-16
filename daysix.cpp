@@ -78,7 +78,7 @@ namespace DaySix{
 	}
 
 	void partOne(vector<vector<uint>> numbers, vector<char> operators){
-		cout << "Part One" << endl;
+		cout << "\t\tPart One" << endl;
 
 		int colCount = numbers[0].size();
 		ulong total = 0;
@@ -93,15 +93,15 @@ namespace DaySix{
 			total = total + totalColumn(col, operators[i]);
 		}
 
-		cout << "Total: " << total << endl;
+		cout << "\t\t\tTotal: " << total << endl;
 	}
 
 	void partTwo(){
-		cout << "Part Two" << endl;
+		cout << "\t\tPart Two" << endl;
 	}
 
 	void go(){
-		cout << "Day Six" << endl;
+		cout << "\tDay Six" << endl;
 
 		vector<string> input = Util::File::readFileAsListOfStrings("data/input_daysix.txt");
 		vector<vector<uint>> numberRows = getNumberRowsFromInput(input);

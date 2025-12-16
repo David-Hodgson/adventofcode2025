@@ -12,7 +12,7 @@ namespace DayOne {
 
 	void partOne(vector<string> commands){
 
-		cout << "Part One\n";
+		cout << "\t\tPart One\n";
 
 		int currentPos = 50;
 		int zeroCount = 0;
@@ -46,13 +46,13 @@ namespace DayOne {
 				zeroCount++;
 		}
 
-		cout << "Number of zero's: " << zeroCount << "\n";
+		cout << "\t\t\tNumber of zero's: " << zeroCount << "\n";
 	}
 
 
 	void partTwo(vector<string> commands){
 
-		cout << "Part Two\n";
+		cout << "\t\tPart Two\n";
 
 		int currentPos = 50;
 		int zeroCount = 0;
@@ -79,12 +79,12 @@ namespace DayOne {
 			}
 		}
 
-		cout << "Number of zero's: " << zeroCount << "\n";
+		cout << "\t\t\tNumber of zero's: " << zeroCount << "\n";
 	}
 
 	void dayone(){
 
-		cout << "Day One\n";
+		cout << "\tDay One\n";
 		vector<string> commands = Util::File::readFileAsListOfStrings("data/input_dayone.txt");
 
 		partOne(commands);

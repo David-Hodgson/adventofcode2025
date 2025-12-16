@@ -55,7 +55,7 @@ namespace DayTwo{
 
 	void partOne(vector<Range> ranges){
 
-		cout << "Part One\n";
+		cout << "\t\tPart One\n";
 
 		ulong total = 0;
 		for(int i=0;i<ranges.size(); i++){
@@ -79,18 +79,18 @@ namespace DayTwo{
 			}
 		}
 
-		cout << "Total: " << total << "\n";
+		cout << "\t\t\tTotal: " << total << "\n";
 	}
 
 
 	void partTwo(){
 
-		cout << "Part Two\n";
+		cout << "\t\tPart Two\n";
 	}
 
 	void go(){
 
-		cout << "Day Two\n";
+		cout << "\tDay Two\n";
 		string input = Util::File::readFileAsString("data/input_daytwo.txt"); 
 		vector<Range> ranges = processInput(input);
 
