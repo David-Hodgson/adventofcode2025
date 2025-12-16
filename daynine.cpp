@@ -90,8 +90,6 @@ namespace DayNine{
 				if (r.Size() > maxSize)
 					maxSize = r.Size();
 			}
-			
-
 		}
 
 		cout << "\t\t\tMax Size Rectangle: " << maxSize << endl;
