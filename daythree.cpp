@@ -39,7 +39,7 @@ namespace DayThree{
 
 	void partOne(vector<string> input){
 
-		cout << "Part One\n";
+		cout << "\t\tPart One\n";
 
 		int total = 0;
 
@@ -70,17 +70,17 @@ namespace DayThree{
 			total = total + (tens * 10) + units;
 		}
 
-		cout << "Total: " << total << "\n";
+		cout << "\t\t\tTotal: " << total << "\n";
 	}
 
 	void partTwo(){
 
-		cout << "Part Two\n";
+		cout << "\t\tPart Two\n";
 	}
 
 	void go(){
 
-		cout << "Day Three\n";
+		cout << "\tDay Three\n";
 
 		vector<string> input = Util::File::readFileAsListOfStrings("data/input_daythree.txt");
 

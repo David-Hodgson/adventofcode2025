@@ -78,23 +78,23 @@ class PaperGrid{
 
 void partOne(vector<string> input){
 
-	cout << "Part One\n";
+	cout << "\t\tPart One\n";
 
 	PaperGrid grid = PaperGrid(input);
 
 	int count = grid.GetAccessibleRolls();
 
-	cout << "Count: " << count << endl;
+	cout << "\t\t\tCount: " << count << endl;
 }
 
 void partTwo(){
 
-	cout << "Part Two\n";
+	cout << "\t\tPart Two\n";
 }
 
 void dayfour(){
 
-	cout << "Day Four\n";
+	cout << "\tDay Four\n";
 
 	vector<string> input = Util::File::readFileAsListOfStrings("data/input_dayfour.txt");
 
