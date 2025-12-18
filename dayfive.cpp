@@ -35,7 +35,7 @@ namespace DayFive{
 
 	void partOne(vector<string> input){
 
-		cout << "Part One" << endl;
+		cout << "\t\tPart One" << endl;
 
 		IDRangeDatabase db;
 		bool doneRanges = false;
@@ -64,16 +64,16 @@ namespace DayFive{
 
 		}
 
-		cout << "Total Fresh Foods: " << totalFreshFoods << endl;
+		cout << "\t\t\tTotal Fresh Foods: " << totalFreshFoods << endl;
 		
 	}
 
 	void partTwo(){
-		cout << "Part Two" << endl;
+		cout << "\t\tPart Two" << endl;
 	}
 	
 	void go(){
-		cout << "Day Five" << endl;
+		cout << "\tDay Five" << endl;
 
 		vector<string> input = Util::File::readFileAsListOfStrings("data/input_dayfive.txt");
 
