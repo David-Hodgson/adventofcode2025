@@ -7,4 +7,8 @@ namespace Util{
 
 		std::string readFileAsString(std::string);
 	}
+
+	namespace String{
+		std::vector<std::string> split(std::string, char);
+	}
 }
