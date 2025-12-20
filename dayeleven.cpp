@@ -43,8 +43,30 @@ namespace DayEleven{
 		return deviceMap;
 	}
 
-	void partOne() {
+	void partOne(map<string,Device*> devices) {
 		cout << "\t\tPart One" << endl;
+
+		Device* startDevice = devices["you"];
+		int pathCount = 1;
+		vector<string> paths;
+
+		paths.push_back(startDevice->Name());
+		while (paths.size() > 0) {
+			Device* d = devices[paths[0]];
+
+			vector<string> outputs = d->Outputs();
+			pathCount = pathCount + outputs.size() -1;
+
+			for(int i=0;i<outputs.size();i++){
+				if (outputs[i] != "out") {
+					paths.push_back(outputs[i]);
+				}
+			}
+			
+			paths.erase(paths.begin());
+		}
+
+		cout << "\t\t\tPath Count: " << pathCount << endl;
 	}
 
 	void partTwo() {
@@ -57,15 +79,8 @@ namespace DayEleven{
 		vector<string> input = Util::File::readFileAsListOfStrings("data/input_dayeleven.txt");
 
 		map<string, Device*> devices = parseInput(input);
+		partOne(devices);
 
-		Device* youDevice = devices["you"];
-
-		cout << youDevice->Name() << endl;
-		for (int i=0;i<youDevice->Outputs().size();i++) {
-			cout << "\t" << youDevice->Outputs()[i] << endl;
-		}
-
-		partOne();
 		partTwo();
 	}
 }
