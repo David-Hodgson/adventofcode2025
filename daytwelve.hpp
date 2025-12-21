@@ -1,0 +1,3 @@
+namespace DayTwelve {
+	void go();
+}
