@@ -19,17 +19,28 @@ namespace DayTwelve {
 		{}
 	};
 
+	class Region{
+		int shape1Count;
+		int shape2Count;
+		int shape3Count;
+		int shape4Count;
+		int shape5Count;
+
+		public:
+
+		Region(int oneCount, int twoCount, int threeCount, int fourCount, int fiveCount):
+			shape1Count(oneCount), shape2Count(twoCount), shape3Count(threeCount), shape4Count(fourCount), shape5Count(fiveCount)
+		{}
+
+	};
+
 	vector<PresentShape*> parseShapesFromInput(vector<string> input) {
 		cout << "Parsing Shapes" << endl;
 
 		vector<PresentShape*> shapes;
 
 		for(int i=0; i<input.size();i++) {
-			cout << "\t" << input[i] << endl;
-
 			if (input[i][1] == ':') {
-				cout << "\t\tFound ID line" << endl;
-
 				string id = "" + input[i][0];
 
 				vector<string> shapelines;
@@ -43,6 +54,30 @@ namespace DayTwelve {
 			}
 		}
 		return shapes;
+	}
+
+
+	vector<Region*> parseRegionsFromInput(vector<string> input) {
+		vector<Region*> regions;
+
+		for(int i=0; i<input.size(); i++) {
+
+			if (input[i].find('x') != -1) {
+				int splitPos = input[i].find(':');
+				vector<string> shapeCount = Util::String::split(input[i].substr(splitPos + 2), ' ');
+
+				int s1 = stoi(shapeCount[0]);
+				int s2 = stoi(shapeCount[1]);
+				int s3 = stoi(shapeCount[2]);
+				int s4 = stoi(shapeCount[3]);
+				int s5 = stoi(shapeCount[4]);
+
+				Region* r = new Region(s1,s2,s3,s4,s5);
+				regions.push_back(r);
+			}
+		}
+		return regions;
+
 	}
 
 	void partOne() {
@@ -63,6 +98,9 @@ namespace DayTwelve {
 		vector<PresentShape*> shapes = parseShapesFromInput(input);
 
 		cout << "Parse " << shapes.size() << " shapes" << endl;
+
+		vector<Region*> regions = parseRegionsFromInput(input);
+		cout << "Parsed " << regions.size() << " regions" << endl;
 
 		partOne();
 		partTwo();
