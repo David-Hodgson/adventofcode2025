@@ -35,8 +35,6 @@ namespace DayTwelve {
 	};
 
 	vector<PresentShape*> parseShapesFromInput(vector<string> input) {
-		cout << "Parsing Shapes" << endl;
-
 		vector<PresentShape*> shapes;
 
 		for(int i=0; i<input.size();i++) {
@@ -80,8 +78,22 @@ namespace DayTwelve {
 
 	}
 
-	void partOne() {
+	void partOne(vector<PresentShape*> shapes, vector<Region*> regions) {
 		cout << "\t\tPart One" << endl;
+
+		for(int i=0; i< regions.size(); i++) {
+			cout << "Processing region " << i << endl;
+
+			//create empty arrangement
+			
+			//for each arrangement
+			//	get remaining presents
+			//	for each present add to arrangement
+			//	creating a new arrangement
+			//
+			//	and loop until all presents add
+			//	or no space left
+		}
 	}
 
 	void partTwo() {
@@ -93,16 +105,10 @@ namespace DayTwelve {
 
 		vector<string> input = Util::File::readFileAsListOfStrings("data/input_daytwelve.txt");
 
-		cout << "Read " << input.size() << " lines" << endl;
-
 		vector<PresentShape*> shapes = parseShapesFromInput(input);
-
-		cout << "Parse " << shapes.size() << " shapes" << endl;
-
 		vector<Region*> regions = parseRegionsFromInput(input);
-		cout << "Parsed " << regions.size() << " regions" << endl;
 
-		partOne();
+		partOne(shapes, regions);
 		partTwo();
 	}
 }
