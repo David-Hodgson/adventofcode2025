@@ -86,6 +86,10 @@ namespace DayTwo{
 	void partTwo(){
 
 		cout << "\t\tPart Two\n";
+
+		//TODO much like part one, but instead of just dividing 
+		//string by two, we need to find all the whole factors
+		// factors will be limited from 1->(string length/2)
 	}
 
 	void go(){
