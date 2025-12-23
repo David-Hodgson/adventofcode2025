@@ -73,9 +73,43 @@ namespace DayThree{
 		cout << "\t\t\tTotal: " << total << "\n";
 	}
 
-	void partTwo(){
+	void partTwo(vector<string> input){
 
 		cout << "\t\tPart Two\n";
+	
+		ulong total = 0;
+		
+		for(int i=0;i<input.size();i++){
+
+			string number = "";
+			int numbersToFind = 12;
+
+			int currentPos = 0;
+
+			for (int j=0; j<numbersToFind; j++) {
+
+				int currentHighest = 0;
+
+				int endPos = input[i].length() - (numbersToFind - j -1);
+
+				for(int k=currentPos; k < endPos ; k++) {
+
+					int value = getNumber(input[i][k]);
+					if (value>currentHighest) {
+						currentHighest = value;
+						currentPos = k;
+					}
+						
+				}
+
+				number = number + to_string(currentHighest);
+				currentPos++;
+			}
+
+			total = total + stoul(number);
+		}
+
+		cout << "\t\t\tTotal: " << total << "\n";
 	}
 
 	void go(){
@@ -85,6 +119,6 @@ namespace DayThree{
 		vector<string> input = Util::File::readFileAsListOfStrings("data/input_daythree.txt");
 
 		partOne(input);
-		partTwo();
+		partTwo(input);
 	}
 }
