@@ -83,13 +83,48 @@ namespace DayTwo{
 	}
 
 
-	void partTwo(){
-
+	void partTwo(vector<Range> ranges){
 		cout << "\t\tPart Two\n";
+		ulong total = 0;
 
-		//TODO much like part one, but instead of just dividing 
-		//string by two, we need to find all the whole factors
-		// factors will be limited from 1->(string length/2)
+		for (int i=0;i<ranges.size();i++) {
+			Range r = ranges[i];
+
+			for(ulong j=r.min; j<=r.max;j++)
+			{
+				string svalue = "" + std::to_string(j);
+				int length = svalue.length();
+
+				bool inValid = false;
+
+				for (int k=1;k<length;k++) {
+
+					if (length%k == 0 && length!=k) {
+						int start = 0;
+						int numberOfChunks = length/k;
+						bool allEqual = true;
+						string checkValue = svalue.substr(0,k);
+
+						for (int x=1; x<numberOfChunks;x++){
+							string sample = svalue.substr(k*x,k);	
+							if (sample !=checkValue) {
+								allEqual = false;
+							}
+						}
+
+
+						if (allEqual && !inValid) {
+							inValid = true;
+							total = total + j;
+						}	
+
+					}
+				}
+			}
+
+		}
+
+		cout << "\t\t\tTotal: " << total << "\n";
 	}
 
 	void go(){
@@ -99,6 +134,6 @@ namespace DayTwo{
 		vector<Range> ranges = processInput(input);
 
 		partOne(ranges);
-		partTwo();
+		partTwo(ranges);
 	}
 }
