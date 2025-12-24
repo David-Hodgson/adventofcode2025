@@ -20,6 +20,8 @@ namespace DayTwelve {
 	};
 
 	class Region{
+		int width;
+		int height;
 		int shape1Count;
 		int shape2Count;
 		int shape3Count;
@@ -28,10 +30,29 @@ namespace DayTwelve {
 
 		public:
 
-		Region(int oneCount, int twoCount, int threeCount, int fourCount, int fiveCount):
-			shape1Count(oneCount), shape2Count(twoCount), shape3Count(threeCount), shape4Count(fourCount), shape5Count(fiveCount)
+		Region(int width, int height, int oneCount, int twoCount, int threeCount, int fourCount, int fiveCount):
+			width(width), height(height), shape1Count(oneCount), shape2Count(twoCount), shape3Count(threeCount), shape4Count(fourCount), shape5Count(fiveCount)
 		{}
 
+		int Height(){
+			return height;
+		}
+
+		int Width(){
+			return width;
+		}
+	};
+
+	class Arrangement{
+
+		Region* region;
+		vector<PresentShape*> presentShapes;
+
+		public:
+
+		Arrangement(Region* region, vector<PresentShape*> presentShapes):
+			region(region), presentShapes(presentShapes)
+		{}
 	};
 
 	vector<PresentShape*> parseShapesFromInput(vector<string> input) {
@@ -61,7 +82,14 @@ namespace DayTwelve {
 		for(int i=0; i<input.size(); i++) {
 
 			if (input[i].find('x') != -1) {
+
 				int splitPos = input[i].find(':');
+				string size = input[i].substr(0,splitPos);
+				vector<string> regionSize = Util::String::split(size,'x');
+				
+				int width = stoi(regionSize[0]);
+				int height = stoi(regionSize[1]);
+
 				vector<string> shapeCount = Util::String::split(input[i].substr(splitPos + 2), ' ');
 
 				int s1 = stoi(shapeCount[0]);
@@ -70,7 +98,7 @@ namespace DayTwelve {
 				int s4 = stoi(shapeCount[3]);
 				int s5 = stoi(shapeCount[4]);
 
-				Region* r = new Region(s1,s2,s3,s4,s5);
+				Region* r = new Region(width,height,s1,s2,s3,s4,s5);
 				regions.push_back(r);
 			}
 		}
@@ -84,8 +112,10 @@ namespace DayTwelve {
 		for(int i=0; i< regions.size(); i++) {
 			cout << "Processing region " << i << endl;
 
+
+			Region* r = regions[i];	
 			//create empty arrangement
-			
+			Arrangement* a = new Arrangement(r, shapes);			
 			//for each arrangement
 			//	get remaining presents
 			//	for each present add to arrangement
