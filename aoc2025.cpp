@@ -21,7 +21,7 @@ int main(){
 	DayOne::dayone();
 	DayTwo::go();
 	DayThree::go();
-	dayfour();
+	DayFour::go();	
 	DayFive::go();
 	DaySix::go();
 	DaySeven::go();

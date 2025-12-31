@@ -6,6 +6,7 @@
 
 using namespace std;
 
+namespace DayFour{
 class PaperGrid{
 
 	private:
@@ -74,6 +75,26 @@ class PaperGrid{
 		return rollCount <4;
 	}
 
+
+	int RemoveAccessibleRolls(){
+
+		int total = 0;
+		for(int r=0;r<rowCount;r++){
+			for(int c=0;c<colCount;c++){
+
+				if (hasRoll(r,c) && isAccessible(r,c)){
+					total++;
+					int index = getIndex(r,c);
+					grid[index] = false;
+				}
+
+			}
+		}
+		return total;
+
+
+	}
+
 };
 
 void partOne(vector<string> input){
@@ -87,17 +108,29 @@ void partOne(vector<string> input){
 	cout << "\t\t\tCount: " << count << endl;
 }
 
-void partTwo(){
+void partTwo(vector<string> input){
 
-	cout << "\t\tPart Two\n";
+	cout << "\t\tPart Two" << endl;
+
+	PaperGrid grid = PaperGrid(input);
+
+	int removedCount = 0;
+	int totalRemoved = 0;
+	do {
+		removedCount = grid.RemoveAccessibleRolls();
+		totalRemoved += removedCount;
+	} while (removedCount != 0);
+
+	cout << "\t\t\tTotal Removed: " << totalRemoved << endl;
 }
 
-void dayfour(){
+void go(){
 
 	cout << "\tDay Four\n";
 
 	vector<string> input = Util::File::readFileAsListOfStrings("data/input_dayfour.txt");
 
 	partOne(input);
-	partTwo();
+	partTwo(input);
+}
 }

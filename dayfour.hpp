@@ -1,1 +1,3 @@
-void dayfour();
+namespace DayFour{
+	void go();
+}
