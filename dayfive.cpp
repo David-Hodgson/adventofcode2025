@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include <set>
 
 #include "cutil"
 
@@ -40,7 +39,6 @@ namespace DayFive{
 			for (int i=0; i<input.size(); i++) {
 
 				pair<ulong,ulong> ir = input[i];
-				cout << "Processing " << ir.first << "-" << ir.second << endl;
 
 				bool overlaps = false;
 				pair<ulong,ulong> olrange;
@@ -48,44 +46,50 @@ namespace DayFive{
 				for (int j=0;j<output->size();j++){
 					pair<ulong,ulong> orange = output->at(j);
 
-					cout << orange.first << endl;
-
-					if (ir.first > orange.first && ir.first < orange.second) {
+					if (ir.first >= orange.first && ir.first <= orange.second) {
 						overlaps = true;
 						olrange = orange;
 						pos = j;
 						break;
 					}
 
-					if (ir.second > orange.first && ir.second < orange.second) {
+					if (ir.second >= orange.first && ir.second <= orange.second) {
 						overlaps = true;
 						olrange = orange;
 						pos = j;
 						break;
 					}	
+
+					if (orange.first >= ir.first && orange.first <= ir.second) {
+						overlaps = true;
+						olrange = orange;
+						pos = j;
+						break;
+					}
+
+					if (orange.second >= ir.first && orange.second <= ir.second) {
+					       overlaps = true;
+						olrange = orange;
+				 		pos = j;
+						break;
+					}		
 				}
 
 				if (!overlaps) {
-					cout << "no overlap, pushing range" << endl;
 					pair<ulong,ulong> range = pair(ir.first,ir.second);
 					output->push_back(range);
 				} else{
-
-					cout << "overlap" << endl;
-					cout << "\t" << ir.first << "-" << ir.second << endl;
-					cout << "\t" << olrange.first << "-" << olrange.second << endl;
-
+					ulong min = olrange.first;
+					ulong max = olrange.second;
 					if (ir.first < olrange.first) {
-						//olrange.first = ir.first;
-						output->at(pos) = pair(ir.first,olrange.second);
-
+						min = ir.first;	
 					}
 
 					if (ir.second > olrange.second) {
-						//olrange.second = ir.second;
-						output->at(pos) = pair(olrange.first, ir.second);
+						max = ir.second;
 					}
 
+					output->at(pos) = pair(min,max);
 				}
 			}
 
@@ -94,11 +98,7 @@ namespace DayFive{
 
 		ulong generateFreshIDCount(){
 			ulong total = 0;
-
-			set<ulong> ids;
-
 			int rangesRemoved = 0;
-
 		
 			vector<pair<ulong,ulong>>* merged = &ranges;
 
@@ -111,13 +111,13 @@ namespace DayFive{
 				
 			} while (rangesRemoved != 0);
 
-
 			for(int i=0;i<merged->size();i++) {
 
 				pair<ulong,ulong> r = merged->at(i);
-				cout << r.first << "-" << r.second << endl;
+				ulong diff = (r.second - r.first);
 
-				ulong diff = (r.second - r.first) + 1;
+				diff++;
+
 				total += diff;
 
 			}
@@ -164,7 +164,6 @@ namespace DayFive{
 	void partTwo(vector<string> input){
 		cout << "\t\tPart Two" << endl;
 
-
 		IDRangeDatabase db;
 		bool doneRanges = false;
 
@@ -180,12 +179,9 @@ namespace DayFive{
 				int pos = input[i].find('-');
 				ulong min = stoul(input[i].substr(0,pos));
 				ulong max = stoul(input[i].substr(pos+1));
-
 				db.addRange(min,max);
 			}
 		}
-
-		cout << "Done the reading" << endl;
 
 		ulong total = db.generateFreshIDCount();
 
