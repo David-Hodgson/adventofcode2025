@@ -49,9 +49,8 @@ namespace DayFive{
 					if ( (ir.first >= orange.first && ir.first <= orange.second) ||
 					 (ir.second >= orange.first && ir.second <= orange.second) ||
 					 (orange.first >= ir.first && orange.first <= ir.second) ||
-
 					 (orange.second >= ir.first && orange.second <= ir.second)) {
-					       overlaps = true;
+					 	overlaps = true;
 						olrange = orange;
 				 		pos = j;
 						break;

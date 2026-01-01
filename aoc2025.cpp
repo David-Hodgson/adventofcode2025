@@ -16,6 +16,8 @@
 using namespace std;
 
 int main(){
+	system("cls");
+	system("clear");
 	cout << "Advent of Code 2025" << endl;
 
 	DayOne::dayone();
