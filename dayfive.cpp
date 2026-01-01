@@ -46,28 +46,11 @@ namespace DayFive{
 				for (int j=0;j<output->size();j++){
 					pair<ulong,ulong> orange = output->at(j);
 
-					if (ir.first >= orange.first && ir.first <= orange.second) {
-						overlaps = true;
-						olrange = orange;
-						pos = j;
-						break;
-					}
+					if ( (ir.first >= orange.first && ir.first <= orange.second) ||
+					 (ir.second >= orange.first && ir.second <= orange.second) ||
+					 (orange.first >= ir.first && orange.first <= ir.second) ||
 
-					if (ir.second >= orange.first && ir.second <= orange.second) {
-						overlaps = true;
-						olrange = orange;
-						pos = j;
-						break;
-					}	
-
-					if (orange.first >= ir.first && orange.first <= ir.second) {
-						overlaps = true;
-						olrange = orange;
-						pos = j;
-						break;
-					}
-
-					if (orange.second >= ir.first && orange.second <= ir.second) {
+					 (orange.second >= ir.first && orange.second <= ir.second)) {
 					       overlaps = true;
 						olrange = orange;
 				 		pos = j;
