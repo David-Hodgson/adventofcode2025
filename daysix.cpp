@@ -9,6 +9,55 @@ using namespace std;
 
 namespace DaySix{
 
+	vector<vector<string>> getNumberStringRowsFromInput (vector<string> input){
+
+		vector<vector<string>> rows;
+
+		for(int i=0;i<input.size()-1;i++)
+		{
+			vector<string> numberrow;
+			string numberDigits = "";
+			for (int k=0;k<input[i].length();k++)
+			{
+				if (input[i][k] != ' '){
+					numberDigits = numberDigits + input[i][k];
+				}
+				else {
+					if (numberDigits.length() > 0){
+						if (numberDigits.length() == 1)
+							numberDigits = "000" + numberDigits;
+
+						if (numberDigits.length() == 2)
+							numberDigits = "00" + numberDigits;
+
+						if (numberDigits.length() == 3)
+							numberDigits = "0" + numberDigits;
+
+						numberrow.push_back(numberDigits);
+						numberDigits = "";
+					}
+				}
+			}
+
+			//Parse last entry
+			if (numberDigits.length() > 0) {
+
+				if (numberDigits.length() == 1)
+					numberDigits = "000" + numberDigits;
+
+				if (numberDigits.length() == 2)
+					numberDigits = "00" + numberDigits;
+
+				if (numberDigits.length() == 3)
+					numberDigits = "0" + numberDigits;
+
+				numberrow.push_back(numberDigits);
+			}
+			rows.push_back(numberrow);
+		}
+
+		return rows;
+	}
 	vector<vector<uint>> getNumberRowsFromInput (vector<string> input){
 
 		vector<vector<uint>> rows;
@@ -96,8 +145,36 @@ namespace DaySix{
 		cout << "\t\t\tTotal: " << total << endl;
 	}
 
-	void partTwo(){
+	void partTwo(vector<vector<string>> numberStrings, vector<char> operators){
 		cout << "\t\tPart Two" << endl;
+
+		int colCount = numberStrings[0].size();
+		ulong total = 0;
+
+		cout << "Col Count: " << colCount << endl;
+
+		for (int i=0;i<colCount;i++) {
+
+			cout << "Processing col " << i << endl;
+			vector<uint> colNumbers;
+			
+			for(int j=0;j<4;j++) {
+				string numberDigits = "";
+
+				for(int k=0;k<numberStrings.size();k++){
+					numberDigits = numberDigits + numberStrings[k][i][j];
+				}
+
+				cout << "ND: " << numberDigits << endl;
+
+				int number = stoi(numberDigits);
+				colNumbers.push_back(number);
+			}
+
+			total = total + totalColumn(colNumbers,operators[i]);
+		}
+
+		cout << "\t\t\tTotal: " << total << endl;
 	}
 
 	void go(){
@@ -108,7 +185,12 @@ namespace DaySix{
 		vector<char> operators = getOperatorsFromInput(input);
 		
 		partOne(numberRows, operators);
-		
-		partTwo();
+	
+		vector<vector<string>> numberStringRows = getNumberStringRowsFromInput(input);	
+
+		for (int i=0;i<numberStringRows[0].size();i++) {
+			cout << numberStringRows[0][i] << endl;
+		}
+		partTwo(numberStringRows, operators);
 	}
 }
